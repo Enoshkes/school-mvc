@@ -1,0 +1,53 @@
+﻿@model IEnumerable<school.Models.TeacherModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@if(!ViewData.ModelState.IsValid)
+{
+    <span class="alert-danger">
+        @ViewData.ModelState["deleteError"]?.Errors.FirstOrDefault()?.ErrorMessage
+    </span>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { teacherId = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { teacherId = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { teacherId = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
